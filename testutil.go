@@ -1,4 +1,23 @@
 // Package testutil provides utilities to make common testing tasks easier.
+//
+// For example, consider the task of creating a temporary file, and then
+// removing it. Normally, this might look something like:
+//  func TestTempFile(t *testing.T) {
+//      f, err := ioutil.TempFile("", "")
+//      if err != nil {
+//          t.Fatal("could not create temp file:", err)
+//      }
+//      err = os.Remove(f.Name())
+//      if err != nil {
+//          t.Fatalf("could not remove temp file:", err)
+//      }
+//  }
+//
+// Using testutil, this can be shortened to:
+//  func TestTempFile(t *testing.T) {
+//      f := testutil.MustTempFile(t, "", "")
+//      testutil.Must(os.Remove(f.Name()))
+//  }
 package testutil
 
 import (
