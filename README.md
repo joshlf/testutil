@@ -9,7 +9,7 @@ Package `testutil` provides utilities to make common testing tasks easier.
 A common pattern in testing is to check that an error is nil, and fail if it is
 non-nil. For example:
 
-```
+``` go
 func TestFoo(t *testing.T) {
   f, err := getFoo()
   if err != nil {
@@ -21,7 +21,7 @@ func TestFoo(t *testing.T) {
 
 `testutil` provides a number of convenience functions to make this common task easier such as `Must`, which checks that its argument is nil, and otherwise calls `t.Fatal`:
 
-```
+``` go
 func TestFoo(t *testing.T) {
   f, err := getFoo()
   testutil.Must(t, err)
@@ -33,7 +33,7 @@ func TestFoo(t *testing.T) {
 
 Conversely, it's also common to check that a particular error is returned:
 
-```
+``` go
 func TestFooError(t *testing.T) {
   _, err := getFoo()
   if err == nil || err.Error() != "error string" {
@@ -44,7 +44,7 @@ func TestFooError(t *testing.T) {
 
 `testutil` makes this easy as well:
 
-```
+``` go
 func TestFooError(t *testing.T) {
   _, err := getFoo()
   testutil.MustError(t, "error string", err)
@@ -55,7 +55,7 @@ func TestFooError(t *testing.T) {
 
 Tests often rely on creating temporary files or directories, which results in a lot of boilerplate:
 
-```
+``` go
 func TestTempFile(t *testing.T) {
   f, err := ioutil.TempFile("", "")
   if err != nil {
@@ -70,7 +70,7 @@ func TestTempFile(t *testing.T) {
 
 `testutil` handles this simply as well:
 
-```
+``` go
 func TestTempFile(t *testing.T) {
   f := testutil.MustTempFile(t, "", "")
   testutil.Must(os.Remove(f.Name()))
