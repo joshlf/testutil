@@ -1,3 +1,9 @@
+<!--
+Copyright 2016 The Authors. All rights reserved.
+Use of this source code is governed by a BSD-style
+license that can be found in the LICENSE file.
+-->
+
 # testutil [![GoDoc](https://godoc.org/github.com/joshlf/testutil?status.svg)](https://godoc.org/github.com/joshlf/testutil)
 
 Package `testutil` provides utilities to make common testing tasks easier.
