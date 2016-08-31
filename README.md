@@ -76,3 +76,11 @@ func TestTempFile(t *testing.T) {
   testutil.Must(os.Remove(f.Name()))
 }
 ```
+
+## Other features
+
+Complete documentation is at [godoc.org](https://godoc.org/github.com/joshlf/testutil).
+
+## Contributing
+
+Contributions are welcome by pull request (please add your name to the `AUTHORS` file), or by submitting an issue. Feel free to email [hello@joshlf.com](mailto:hello@joshlf.com) if you have questions about contributing.

@@ -1,3 +1,7 @@
+// Copyright 2016 The Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
 // Package testutil provides utilities to make common testing tasks easier.
 //
 // For example, consider the task of creating a temporary file, and then
