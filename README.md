@@ -15,7 +15,6 @@ func TestFoo(t *testing.T) {
   if err != nil {
     t.Fatalf("could not get foo:", err)
   }
-  ...
 }
 ```
 
@@ -25,7 +24,6 @@ func TestFoo(t *testing.T) {
 func TestFoo(t *testing.T) {
   f, err := getFoo()
   testutil.Must(t, err)
-  ...
 }
 ```
 
