@@ -20,7 +20,7 @@
 // Using testutil, this can be shortened to:
 //  func TestTempFile(t *testing.T) {
 //      f := testutil.MustTempFile(t, "", "")
-//      testutil.Must(os.Remove(f.Name()))
+//      testutil.Must(t, os.Remove(f.Name()))
 //  }
 package testutil
 
