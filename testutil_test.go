@@ -165,7 +165,9 @@ func TestMustTempDir(t *testing.T) {
 	dir := MustTempDir(t, "", "")
 	defer os.RemoveAll(dir)
 	nonexistant := filepath.Join(dir, "foo")
-	re := "^testutil_test.go:[0-9]+: mkdir " + nonexistant +
+	// NOTE: On older versions of go, the error is "mkdir ...",
+	// while on newer versions, it's "stat ..."
+	re := "^testutil_test.go:[0-9]+: (mkdir|stat) " + nonexistant +
 		".*: no such file or directory$"
 	expectFatal(t, re, func() { MustTempDir(mock, nonexistant, "") })
 }
@@ -185,4 +187,23 @@ func TestMustTempFile(t *testing.T) {
 	re := "^testutil_test.go:[0-9]+: open " + nonexistant +
 		".*: no such file or directory$"
 	expectFatal(t, re, func() { MustTempFile(mock, nonexistant, "") })
+}
+
+func TestMustWriteTempFile(t *testing.T) {
+	var name string
+	expectSuccess(t, func() {
+		path := MustWriteTempFile(mock, "", "", nil)
+		if !filepath.HasPrefix(path, os.TempDir()) {
+			t.Fatalf("temp file %v not in default temp directory %v", path, os.TempDir())
+		}
+	})
+	defer os.Remove(name)
+
+	// Make a directory we know for a fact is empty
+	dir := MustTempDir(t, "", "")
+	defer os.RemoveAll(dir)
+	nonexistant := filepath.Join(dir, "foo")
+	re := "^testutil_test.go:[0-9]+: open " + nonexistant +
+		".*: no such file or directory$"
+	expectFatal(t, re, func() { MustWriteTempFile(mock, nonexistant, "", nil) })
 }

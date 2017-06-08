@@ -85,6 +85,24 @@ func MustTempFile(t TB, dir, prefix string) (f *os.File) {
 	return f
 }
 
+// MustWriteTempFile attempts to create a temp
+// file and initialize it with the given body.
+// Unlike MustTempFile, it only returns the
+// name of the created file. If it fails, it
+// logs the error to t.Fatalf. The arguments
+// dir and prefix behave as documented in
+// ioutil.TempFile.
+func MustWriteTempFile(t TB, dir, prefix string, body []byte) string {
+	f, err := ioutil.TempFile(dir, prefix)
+	must(t, err)
+	name := f.Name()
+	_, err = f.Write(body)
+	must(t, err)
+	must(t, f.Sync())
+	must(t, f.Close())
+	return name
+}
+
 // MustTempDir attempts to create a temp directory,
 // and logs the error to t.Fatalf if it fails.
 // The arguments dir and prefix behave as
